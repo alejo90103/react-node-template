@@ -36,12 +36,25 @@ export default{
             }
           }
         ]
+      },
+      {
+        test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url-loader?limit=10000',
+      },
+      {
+        test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.woff$|\.ttf$|\.wav$|\.mp3$\.svg$/,
+        loader: 'file-loader'  // <-- retain original file name,
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use: 'file-loader?[name].[ext]'
       }
     ]
   },
   plugins: [
     new htmlWebpackPlugin({
-      template: './src/client/index.html'
+      template: './src/client/index.html',
+      favicon: './src/client/favicon.ico'
     }),
     new liveReloadPlugin()
   ]
